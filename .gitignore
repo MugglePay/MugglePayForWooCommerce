@@ -1,0 +1,14 @@
+.DS_Store
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+yarn.lock
+package-lock.json
+.prettierrc
+.vscode
+.vscode/*
