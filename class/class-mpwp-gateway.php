@@ -33,6 +33,11 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
                 'currency'   => '',
                 'order_button_text' => __('Proceed to MugglePay', 'mpwp')
             ),
+            'card_methods'    => array(
+                'title' => __('Card', 'mpwp'),
+                'currency'   => 'CARD',
+                'order_button_text' => __('Proceed to Card', 'mpwp')
+            ),
             'alipay_methods'    => array(
                 'title' => __('Alipay', 'mpwp'),
                 'currency'   => 'ALIPAY',
