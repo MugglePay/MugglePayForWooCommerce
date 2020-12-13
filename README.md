@@ -53,9 +53,7 @@ Description of the payment method on the checkout page
 
 ### API Key
 
-Your Coinbase Commerce API key. Available within the [Coinbase Commerce settings page].
-
-Using an API key allows your website to periodically check Coinbase Commerce for payment confirmation.
+Register your MugglePay merchant accounts with your invitation code and get your API key at [Merchants Portal](https://merchants.mugglepay.com/user/register?ref=MP9237F1193789). You will find your API Auth Token (API key) for authentication. [MORE](https://merchants.mugglepay.com/user/register?ref=MP9237F1193789)
 
 ## Prerequisites
 
