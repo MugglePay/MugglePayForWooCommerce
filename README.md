@@ -59,8 +59,8 @@ Register your MugglePay merchant accounts with your invitation code and get your
 
 To use this plugin with your WooCommerce store you will need:
 
-* [WordPress] (tested up to 4.9.7)
-* [WooCommerce] (tested up to 3.4.3)
+* [WordPress] (tested up to 5.6.0)
+* [WooCommerce] (tested up to 4.7.1)
 
 
 ## License
