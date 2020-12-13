@@ -55,6 +55,8 @@ Description of the payment method on the checkout page
 
 Register your MugglePay merchant accounts with your invitation code and get your API key at [Merchants Portal](https://merchants.mugglepay.com/user/register?ref=MP9237F1193789). You will find your API Auth Token (API key) for authentication. [MORE](https://merchants.mugglepay.com/user/register?ref=MP9237F1193789)
 
+![Setting Page](./assets/setting.jpg)
+
 ## Prerequisites
 
 To use this plugin with your WooCommerce store you will need:
