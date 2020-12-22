@@ -4,27 +4,12 @@ Plugin Name:  MugglePay For WooCommerce
 Plugin URI:   https://github.com/hoythan/MugglePayForWooCommerce
 Description:  MugglePay is a one-stop payment solution for merchants with an online payment need.
 Version:      1.0.0
-Author:       MugglePay
+Author:       hoythan
 Author URI:   https://merchants.mugglepay.com/user/register?ref=MP9237F1193789
 Text Domain:  mpwp
 Domain Path:  /i18n/languages/
 License:      GPLv3+
 License URI:  https://www.gnu.org/licenses/gpl-3.0.html
-
-Copyright (C) 2020 MugglePay.
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 define('MPWP_PLUGIN_URL', plugins_url('', __FILE__));
@@ -34,8 +19,8 @@ function mpwp_init()
 {
     // If WooCommerce is available, initialise WC parts.
     if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-        require_once 'class/class-mpwp-gateway.php';
-        require_once 'class/gateways/class-mpwp-alipay.php';
+        require_once __DIR__ . '/class/class-mpwp-gateway.php';
+        require_once __DIR__ . '/class/gateways/class-mpwp-alipay.php';
 
         // add_action( 'init', 'cb_wc_register_blockchain_status' );
         add_filter('woocommerce_payment_gateways', 'mpwp_add_gateway_class');
