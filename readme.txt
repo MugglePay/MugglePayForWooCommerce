@@ -1,4 +1,4 @@
-=== MugglePay For WooCommerce ===
+=== DFOXT MugglePay For WooCommerce ===
 Contributors: hoythan
 Tags: mugglepay woocommerce alipay wechat btc digital payment
 Requires at least: 5.6

@@ -1,4 +1,4 @@
-English | [简体中文](./readme-zh-CN.md)
+[English](./readme.md) | 简体中文
 
 # MugglePay For WooCommerce
 > MugglePay is a one-stop payment solution for merchants with an online payment need.

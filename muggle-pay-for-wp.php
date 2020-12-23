@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name:  MugglePay For WooCommerce
+Plugin Name:  DFOXM MugglePay For WooCommerce
 Plugin URI:   https://github.com/hoythan/MugglePayForWooCommerce
 Description:  MugglePay is a one-stop payment solution for merchants with an online payment need.
-Version:      1.0.0
+Version:      1.0.1
 Author:       hoythan
 Author URI:   https://merchants.mugglepay.com/user/register?ref=MP9237F1193789
 Text Domain:  mpwp
@@ -19,8 +19,8 @@ function mpwp_init()
 {
     // If WooCommerce is available, initialise WC parts.
     if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-        require_once __DIR__ . '/class/class-mpwp-gateway.php';
-        require_once __DIR__ . '/class/gateways/class-mpwp-alipay.php';
+        
+        require_once MPWP_PLUGIN_DIR . 'class/class-mpwp-gateway.php';
 
         // add_action( 'init', 'cb_wc_register_blockchain_status' );
         add_filter('woocommerce_payment_gateways', 'mpwp_add_gateway_class');
