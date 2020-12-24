@@ -15,7 +15,7 @@ This plugin is available on the [WordPress.org plugin repository], and can be in
 3. Activate MugglePay For WooCommerce from your Plugins page.
 
 #### From WordPress.org plugin repository
-1. Download MugglePay For WooCommerce from <https://wordpress.org/plugins/mugglepay-for-woocommerce/>
+1. Download MugglePay For WooCommerce from <https://wordpress.org/plugins/dfoxm-mugglepay-for-woocommerce>
 2. Upload to your ‘/wp-content/plugins/’ directory, using your favorite method (ftp, sftp, scp, etc…)
 3. Activate MugglePay For WooCommerce from your Plugins page.
 

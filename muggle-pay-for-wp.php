@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name:  DFOXM MugglePay For WooCommerce
+Plugin Name:  MugglePay For WooCommerce
 Plugin URI:   https://github.com/hoythan/MugglePayForWooCommerce
 Description:  MugglePay is a one-stop payment solution for merchants with an online payment need.
 Version:      1.0.1
@@ -95,11 +95,11 @@ function mpwp_order_meta_general($order)
 /**
  * i18n init
  */
-function plugin_languages_init()
+function mpwp_plugin_languages_init()
 {
     load_plugin_textdomain('mpwp', false, basename(dirname(__FILE__)) . '/i18n/languages/');
 }
-add_action('plugins_loaded', 'plugin_languages_init');
+add_action('plugins_loaded', 'mpwp_plugin_languages_init');
 
 
 /**
