@@ -9,8 +9,14 @@ if (! defined('ABSPATH')) {
  */
 class WC_Gateway_MPWP extends WC_Payment_Gateway
 {
-    // 定义当前使用的支付网关
+    /** @var Multi Method */
     public $current_method = '';
+
+    /** @var bool Whether or not logging is enabled */
+    public static $log_enabled = false;
+
+    /** @var WC_Logger Logger instance */
+    public static $log = false;
 
     /**
      * Constructor for the gateway.
@@ -101,8 +107,11 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
         $this->init_settings();
 
         // Define user set variables.
-        $this->title = $this->get_option('title');
-        $this->method_description = $this->get_option('description');
+        $this->title                = $this->get_option('title');
+        $this->method_description   = $this->get_option('description');
+        $this->debug                = 'yes' === $this->get_option('debug', 'no');
+
+        self::$log_enabled = $this->debug;
 
         add_action('woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ));
         add_action('woocommerce_api_wc_gateway_mpwp', array( $this, 'check_response' ));
@@ -110,6 +119,27 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
         // add_action('woocommerce_cancelled_order', array( $this, 'cancel_order' ), 10 ,1);
         // add_action( 'woocommerce_order_status_processing', array( $this, 'capture_payment' ) );
         // add_action( 'woocommerce_order_status_completed', array( $this, 'capture_payment' ) );
+    }
+
+    /**
+     * Logging method.
+     *
+     * @param string $message Log message.
+     * @param string $level   Optional. Default 'info'.
+     *     emergency|alert|critical|error|warning|notice|info|debug
+     * @param boolean $is_end insert log end flag
+     */
+    public static function log($message, $level = 'info', $is_end = true)
+    {
+        if (self::$log_enabled) {
+            if (empty(self::$log)) {
+                self::$log = wc_get_logger();
+            }
+            self::$log->log($level, $message, array( 'source' => 'mpwp' ));
+            if ($is_end) {
+                self::$log->log($level, '=========================================== ↑↑↑ END ↑↑↑ ===========================================', array( 'source' => 'mpwp' ));
+            }
+        }
     }
 
     /**
@@ -123,6 +153,14 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
                 'type'          => 'checkbox',
                 'label'         => __('Enable MugglePay', 'mpwp'),
                 'default'       => 'yes'
+            ),
+            'debug'          => array(
+                'title'       => __('Debug log', 'mpwp'),
+                'type'        => 'checkbox',
+                'label'       => __('Enable logging', 'mpwp'),
+                'default'     => 'no',
+                // translators: Description for 'Debug log' section of settings page.
+                'description' => sprintf(__('Log MPWP API events inside %s', 'mpwp'), '<code>' . WC_Log_Handler_File::get_log_file_path('mpwp') . '</code>'),
             ),
             'title'                 => array(
                 'title'       => __('Title', 'mpwp'),
@@ -226,14 +264,19 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
                 $order = wc_get_order($order_id);
 
                 if (! $order) {
+                    self::log('Failed to Checking IPN response order callback for: ' . $order_id, 'error');
                     throw new Exception('Checking IPN response is valid');
                 }
 
                 if ($order->has_status(wc_get_is_paid_statuses())) {
+                    self::log('Aborting, Order #' . $order_id. ' is already complete.', 'error');
                     throw new Exception('Aborting, Order #' . $order_id. ' is already complete.');
                 }
 
                 if (! $this->check_order_token($order, $posted['token'])) {
+                    self::log('Checking IPN response is valid: ' , 'error', false);
+                    self::log(print_r( $posted, true ), 'error', false);
+                    self::log(print_r( $order, true ), 'error');
                     throw new Exception('Checking IPN response is valid');
                 }
                 // Payment is complete
@@ -252,6 +295,8 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
                 ), 200);
                 exit;
             }
+            self::log('Failed to check response order callback : ', 'error', false);
+            self::log(print_r( $posted, true ), 'error', false);
             throw new Exception('MugglePay IPN Request Failure');
         } catch (Exception $e) {
             add_option('test message', $e->getMessage());
@@ -331,6 +376,9 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
                 'token'	=> $this->get_option('api_key')
             )
         );
+
+        self::log('Create Payment Url: ' , 'info', false);
+        self::log(print_r( $raw_response, true ), 'info');
 
         if (
             (($raw_response['status'] === 200 || $raw_response['status'] === 201) && $raw_response['payment_url']) ||
