@@ -3,8 +3,8 @@ Contributors: hoythan
 Tags: mugglepay woocommerce alipay wechat btc digital payment
 Requires at least: 5.6
 Tested up to: 5.6.0
-Requires PHP: 7.2
-Stable tag: 1.0.1
+Requires PHP: 7.0
+Stable tag: 1.0.2
 License: GPLv3+
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,5 +46,8 @@ Clicking the Manage button on the right hand side will take you into the setting
 
 == Changelog ==
 
+= 1.0.2 =
+1. Support Cron Job Check payment statuses on orders and update order statuses.
+
 = 1.0.1 =
-first version
+1. DFOXT MugglePay For WooCommerce

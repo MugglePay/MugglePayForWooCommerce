@@ -57,7 +57,7 @@ Description of the payment method on the checkout page
 
 Register your MugglePay merchant accounts with your invitation code and get your API key at [Merchants Portal](https://merchants.mugglepay.com/user/register?ref=MP9237F1193789). You will find your API Auth Token (API key) for authentication. [MORE](https://merchants.mugglepay.com/user/register?ref=MP9237F1193789)
 
-![Setting Page](https://github.com/hoythan/MugglePayForWooCommerce/blob/main/assets/setting.jpg)
+![Setting Page](https://github.com/hoythan/MugglePayForWooCommerce/blob/main/assets/screenshot-1.jpg)
 
 ## Prerequisites
 
@@ -73,5 +73,8 @@ This project is licensed under the Apache 2.0 License
 
 ## Changelog
 
-## 1.0.0 ##
+## 1.0.2 ##
+* Support Cron Job Check payment statuses on orders and update order statuses.
+
+## 1.0.1 ##
 * DFOXT MugglePay For WooCommerce
