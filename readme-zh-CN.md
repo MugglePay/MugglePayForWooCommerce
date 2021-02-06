@@ -1,4 +1,4 @@
-[English](./readme.md) | 简体中文
+[English](https://github.com/hoythan/MugglePayForWooCommerce) | 简体中文
 
 # DFOXT MugglePay For WooCommerce
 > MugglePay是为有在线收款需求的商家提供的一站式收款解决方案。
