@@ -1,8 +1,8 @@
 == DFOXT MugglePay For WooCommerce ==
 Contributors: hoythan
 Tags: mugglepay woocommerce alipay wechat btc digital payment
-Requires at least: 5.6
-Tested up to: 5.6.0
+Requires at least: 5.3
+Tested up to: 5.6.1
 Requires PHP: 7.0
 Stable tag: 1.0.2
 License: GPLv3+
