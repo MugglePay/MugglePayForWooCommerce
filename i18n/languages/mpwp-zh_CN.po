@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MugglePayForWP\n"
-"POT-Creation-Date: 2020-12-13 23:57+0800\n"
-"PO-Revision-Date: 2020-12-13 23:57+0800\n"
+"POT-Creation-Date: 2021-02-07 06:19+0800\n"
+"PO-Revision-Date: 2021-02-07 06:19+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -21,141 +21,154 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 
-#: class/class-mpwp-gateway.php:27 class/class-mpwp-gateway.php:34
+#: class/class-mpwp-gateway.php:33 class/class-mpwp-gateway.php:40
 msgid "Proceed to MugglePay"
 msgstr "继续使用 MugglePay 支付"
 
-#. Author of the plugin/theme
-#: class/class-mpwp-gateway.php:28 class/class-mpwp-gateway.php:32
-#: class/class-mpwp-gateway.php:131
+#: class/class-mpwp-gateway.php:34 class/class-mpwp-gateway.php:38
+#: class/class-mpwp-gateway.php:161
 msgid "MugglePay"
 msgstr "MugglePay"
 
-#: class/class-mpwp-gateway.php:37
+#: class/class-mpwp-gateway.php:43
 msgid "Card"
 msgstr "国际信用卡"
 
-#: class/class-mpwp-gateway.php:39
+#: class/class-mpwp-gateway.php:45
 msgid "Proceed to Card"
 msgstr "继续使用 国际信用卡 支付"
 
-#: class/class-mpwp-gateway.php:42
+#: class/class-mpwp-gateway.php:48
 msgid "Alipay"
 msgstr "支付宝"
 
-#: class/class-mpwp-gateway.php:44
+#: class/class-mpwp-gateway.php:50
 msgid "Proceed to Alipay"
 msgstr "继续使用 支付宝 支付"
 
-#: class/class-mpwp-gateway.php:47
+#: class/class-mpwp-gateway.php:53
 msgid "Alipay Global"
 msgstr "支付宝(国际)"
 
-#: class/class-mpwp-gateway.php:49
+#: class/class-mpwp-gateway.php:55
 msgid "Proceed to Alipay Global"
 msgstr "继续使用 支付宝(国际) 支付"
 
-#: class/class-mpwp-gateway.php:52
+#: class/class-mpwp-gateway.php:58
 msgid "Wechat"
 msgstr "微信支付"
 
-#: class/class-mpwp-gateway.php:54
+#: class/class-mpwp-gateway.php:60
 msgid "Proceed to Wechat"
 msgstr "继续使用 微信 支付"
 
-#: class/class-mpwp-gateway.php:57
+#: class/class-mpwp-gateway.php:63
 msgid "BTC"
 msgstr ""
 
-#: class/class-mpwp-gateway.php:59
+#: class/class-mpwp-gateway.php:65
 msgid "Proceed to BTC"
 msgstr "继续使用 BTC 支付"
 
-#: class/class-mpwp-gateway.php:62
+#: class/class-mpwp-gateway.php:68
 msgid "LTC"
 msgstr ""
 
-#: class/class-mpwp-gateway.php:64
+#: class/class-mpwp-gateway.php:70
 msgid "Proceed to LTC"
 msgstr "继续使用 LTC 支付"
 
-#: class/class-mpwp-gateway.php:67
+#: class/class-mpwp-gateway.php:73
 msgid "ETH"
 msgstr ""
 
-#: class/class-mpwp-gateway.php:69
+#: class/class-mpwp-gateway.php:75
 msgid "Proceed to ETH"
 msgstr "继续使用 ETH 支付"
 
-#: class/class-mpwp-gateway.php:72
+#: class/class-mpwp-gateway.php:78
 msgid "EOS"
 msgstr ""
 
-#: class/class-mpwp-gateway.php:74
+#: class/class-mpwp-gateway.php:80
 msgid "Proceed to EOS"
 msgstr "继续使用 EOS 支付"
 
-#: class/class-mpwp-gateway.php:77
+#: class/class-mpwp-gateway.php:83
 msgid "BCH"
 msgstr ""
 
-#: class/class-mpwp-gateway.php:79
+#: class/class-mpwp-gateway.php:85
 msgid "Proceed to BCH"
 msgstr "继续使用 BCH 支付"
 
-#: class/class-mpwp-gateway.php:82
+#: class/class-mpwp-gateway.php:88
 msgid "LBTC (for Lightening BTC)"
 msgstr ""
 
-#: class/class-mpwp-gateway.php:84
+#: class/class-mpwp-gateway.php:90
 msgid "Proceed to LBTC"
 msgstr "继续使用 LBTC 支付"
 
-#: class/class-mpwp-gateway.php:87
+#: class/class-mpwp-gateway.php:93
 msgid "CUSD (for Celo Dollars)"
 msgstr ""
 
-#: class/class-mpwp-gateway.php:89
+#: class/class-mpwp-gateway.php:95
 msgid "Proceed to CUSD"
 msgstr "继续使用 CUSD 支付"
 
-#: class/class-mpwp-gateway.php:122
+#: class/class-mpwp-gateway.php:152
 msgid "Enable/Disable"
 msgstr "启用/禁用"
 
-#: class/class-mpwp-gateway.php:124
+#: class/class-mpwp-gateway.php:154
 msgid "Enable MugglePay"
 msgstr "启用 MugglePay"
 
-#: class/class-mpwp-gateway.php:128
+#: class/class-mpwp-gateway.php:158
 msgid "Title"
 msgstr "标题"
 
-#: class/class-mpwp-gateway.php:130
+#: class/class-mpwp-gateway.php:160
 msgid "This controls the title which the user sees during checkout."
 msgstr "此设置控制用户在结帐时看到的名称。"
 
-#: class/class-mpwp-gateway.php:135
+#: class/class-mpwp-gateway.php:165
 msgid "Description"
 msgstr "描述"
 
-#: class/class-mpwp-gateway.php:138
+#: class/class-mpwp-gateway.php:168
 msgid "This controls the description which the user sees during checkout."
 msgstr "这个控制用户在结帐时看到的描述。"
 
 #. Description of the plugin/theme
-#: class/class-mpwp-gateway.php:139
+#: class/class-mpwp-gateway.php:169
 msgid ""
 "MugglePay is a one-stop payment solution for merchants with an online "
 "payment need."
 msgstr "MugglePay是为有在线收款需求的商家提供的一站式收款解决方案。"
 
-#: class/class-mpwp-gateway.php:142
+#: class/class-mpwp-gateway.php:172
+msgid "Check Orders"
+msgstr "检查订单"
+
+#: class/class-mpwp-gateway.php:174
+msgid ""
+"The plugin automatically checks the order payment status by default and "
+"updates the order status every 5 minutes."
+msgstr "默认情况下，插件会自动检查订单付款状态，并每 5 分钟更新一次订单状态。"
+
+#: class/class-mpwp-gateway.php:182
+msgid "Setting"
+msgstr "设置"
+
+#: class/class-mpwp-gateway.php:187
 msgid "API Auth Token (API key) "
 msgstr "应用密钥 "
 
 #. translators: %s: URL
-#: class/class-mpwp-gateway.php:146
+#: class/class-mpwp-gateway.php:191
 #, php-format
 msgid ""
 "Register your MugglePay merchant accounts with your invitation code and get "
@@ -167,161 +180,181 @@ msgstr ""
 "target=\"_blank\">API 密钥</a>。您将找到用于身份验证的应用秘钥。 <a href="
 "\"%s\" target=\"_blank\">更多</a>"
 
-#: class/class-mpwp-gateway.php:149
+#: class/class-mpwp-gateway.php:194
+msgid "Debug log"
+msgstr "调试模式"
+
+#: class/class-mpwp-gateway.php:196
+msgid "Enable logging"
+msgstr "启用日志记录"
+
+#. translators: Description for 'Debug log' section of settings page.
+#: class/class-mpwp-gateway.php:199
+#, php-format
+msgid "Log MPWP API events inside %s"
+msgstr "日志文件存储于 %s"
+
+#: class/class-mpwp-gateway.php:202
 msgid "Payment Gateway"
 msgstr "支付网关"
 
-#: class/class-mpwp-gateway.php:202
+#: class/class-mpwp-gateway.php:255
 msgid "Refund failed."
 msgstr "退款失败。"
 
-#: class/class-mpwp-gateway.php:316
+#: class/class-mpwp-gateway.php:394
 #, php-format
 msgid "Payment order #%s"
 msgstr "付款单 #%s"
 
-#: class/class-mpwp-gateway.php:377
+#: class/class-mpwp-gateway.php:460
 msgid "Empty Response"
 msgstr "空响应"
 
-#: class/class-mpwp-gateway.php:410
+#: class/class-mpwp-gateway.php:493
 msgid "Authentication Token is not set or expired."
 msgstr "身份验证令牌未设置或过期。"
 
-#: class/class-mpwp-gateway.php:412
+#: class/class-mpwp-gateway.php:495
 msgid "Invoice does not exist."
 msgstr "凭证不存在。"
 
-#: class/class-mpwp-gateway.php:414
+#: class/class-mpwp-gateway.php:497
 msgid "It has been verified already."
 msgstr "已经验证了。"
 
-#: class/class-mpwp-gateway.php:416
+#: class/class-mpwp-gateway.php:499
 msgid "Invoice does not exist, or it cannot be canceled."
 msgstr "凭证不存在，或者无法取消。"
 
-#: class/class-mpwp-gateway.php:418
+#: class/class-mpwp-gateway.php:501
 msgid "Order does not exist or permission denied."
 msgstr "订单不存在或权限被拒绝。"
 
-#: class/class-mpwp-gateway.php:420
+#: class/class-mpwp-gateway.php:503
 msgid "Order does not exist, or it cannot be canceled."
 msgstr "订单不存在，或者无法取消。"
 
-#: class/class-mpwp-gateway.php:422
+#: class/class-mpwp-gateway.php:505
 msgid "Order does not exist, or it`s status is not refundable."
 msgstr "订单不存在，或者其状态不可退款。"
 
-#: class/class-mpwp-gateway.php:424
+#: class/class-mpwp-gateway.php:507
 msgid "Payment has been verified with payment already."
 msgstr "付款已通过付款进行验证。"
 
-#: class/class-mpwp-gateway.php:426
+#: class/class-mpwp-gateway.php:509
 msgid ""
 "Payment money does not match the order money, please double check the price."
 msgstr "付款金额与订单款不匹配，请仔细检查价格。"
 
-#: class/class-mpwp-gateway.php:428
+#: class/class-mpwp-gateway.php:511
 msgid ""
 "Payment money does not the order of current merchant , please double check "
 "the order."
 msgstr "付款钱不是当前商家的订单，请仔细检查订单。"
 
-#: class/class-mpwp-gateway.php:430
+#: class/class-mpwp-gateway.php:513
 msgid "Order id is not valid."
 msgstr "订单号无效。"
 
-#: class/class-mpwp-gateway.php:432
+#: class/class-mpwp-gateway.php:515
 msgid "Order not exist or is not paid yet."
 msgstr "订单不存在或尚未支付。"
 
-#: class/class-mpwp-gateway.php:434
+#: class/class-mpwp-gateway.php:517
 msgid "Order with same merchant_order_id exisits."
 msgstr "存在相同的订单信息。"
 
-#: class/class-mpwp-gateway.php:436
+#: class/class-mpwp-gateway.php:519
 msgid "The current order is not new, and payment method cannot be switched."
 msgstr "当前订单不是新的，无法切换付款方式。"
 
-#: class/class-mpwp-gateway.php:438
+#: class/class-mpwp-gateway.php:521
 msgid "The payment method is not working, please retry later."
 msgstr "该支付暂时无法使用，请先使用其他支付方式。"
 
-#: class/class-mpwp-gateway.php:440
+#: class/class-mpwp-gateway.php:523
 msgid "The current payment status not ready to send callback."
 msgstr "当前付款状态未准备好发送回调。"
 
-#: class/class-mpwp-gateway.php:442
+#: class/class-mpwp-gateway.php:525
 msgid "Missing parameters."
 msgstr "缺少参数。"
 
-#: class/class-mpwp-gateway.php:448
+#: class/class-mpwp-gateway.php:531
 msgid ""
 "The payment is temporarily unavailable, please use another payment method"
 msgstr "当前付款方式暂时不可用，请使用其他付款方式"
 
-#: class/class-mpwp-gateway.php:450
+#: class/class-mpwp-gateway.php:533
 msgid "Price amount or currency is not set correctly."
 msgstr "价格金额或货币设置不正确。"
 
-#: class/class-mpwp-gateway.php:452
+#: class/class-mpwp-gateway.php:535
 msgid "The email or password does not match."
 msgstr "电子邮件或密码不匹配。"
 
-#: class/class-mpwp-gateway.php:454
+#: class/class-mpwp-gateway.php:537
 msgid "The user does not exist or no permission."
 msgstr "用户不存在或没有权限。"
 
-#: class/class-mpwp-gateway.php:456
+#: class/class-mpwp-gateway.php:539
 msgid "The user operatioin failed."
 msgstr "用户操作失败。"
 
-#: class/class-mpwp-gateway.php:458
+#: class/class-mpwp-gateway.php:541
 msgid "The invitation code is not filled correctly."
 msgstr "邀请代码未正确填充。"
 
-#: class/class-mpwp-gateway.php:460
+#: class/class-mpwp-gateway.php:543
 msgid "Error."
 msgstr "错误."
 
-#: class/class-mpwp-gateway.php:462
+#: class/class-mpwp-gateway.php:545
 msgid "API credentials are not valid"
 msgstr "API 凭据无效"
 
-#: class/class-mpwp-gateway.php:464
+#: class/class-mpwp-gateway.php:547
 msgid "Page, action not found"
 msgstr "页面，未找到操作"
 
-#: class/class-mpwp-gateway.php:466
+#: class/class-mpwp-gateway.php:549
 msgid "API request limit is exceeded"
 msgstr "超过 API 请求限制"
 
-#: class/class-mpwp-gateway.php:468 class/class-mpwp-gateway.php:470
+#: class/class-mpwp-gateway.php:551 class/class-mpwp-gateway.php:553
 msgid "Server error in MugglePay"
 msgstr "MugglePay 支付中的服务器错误"
 
-#: class/class-mpwp-gateway.php:491
+#: class/class-mpwp-gateway.php:574
 msgid "MugglePay acceptance mark"
 msgstr "MugglePay 标记"
 
-#: muggle-pay-for-wp.php:106
+#: muggle-pay-for-wp.php:64
+msgid "Once every 5 minutes"
+msgstr "每5分钟一次"
+
+#: muggle-pay-for-wp.php:99
 msgid "MugglePay Payment Voucher"
 msgstr "MugglePay 支付凭证"
 
-#: muggle-pay-for-wp.php:108
+#: muggle-pay-for-wp.php:102
 #, php-format
 msgid "Transaction ID: %s"
 msgstr "交易号: %s"
 
 #. Plugin Name of the plugin/theme
-msgid "MugglePay For WooCommerce"
+msgid "DFOXT MugglePay For WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-#, fuzzy
-#| msgid "https://github.com/doofox/myggle-pay-for-wp/"
 msgid "https://github.com/hoythan/MugglePayForWooCommerce"
-msgstr "https://github.com/doofox/myggle-pay-for-wp/"
+msgstr "https://github.com/hoythan/MugglePayForWooCommerce"
+
+#. Author of the plugin/theme
+msgid "hoythan"
+msgstr ""
 
 #. Author URI of the plugin/theme
 msgid "https://merchants.mugglepay.com/user/register?ref=MP9237F1193789"

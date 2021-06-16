@@ -9,8 +9,14 @@ if (! defined('ABSPATH')) {
  */
 class WC_Gateway_MPWP extends WC_Payment_Gateway
 {
-    // 定义当前使用的支付网关
+    /** @var Multi Method */
     public $current_method = '';
+
+    /** @var bool Whether or not logging is enabled */
+    public static $log_enabled = false;
+
+    /** @var WC_Logger Logger instance */
+    public static $log = false;
 
     /**
      * Constructor for the gateway.
@@ -101,8 +107,11 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
         $this->init_settings();
 
         // Define user set variables.
-        $this->title = $this->get_option('title');
-        $this->method_description = $this->get_option('description');
+        $this->title                = $this->get_option('title');
+        $this->method_description   = $this->get_option('description');
+        $this->debug                = 'yes' === $this->get_option('debug', 'no');
+
+        self::$log_enabled = $this->debug;
 
         add_action('woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ));
         add_action('woocommerce_api_wc_gateway_mpwp', array( $this, 'check_response' ));
@@ -110,6 +119,27 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
         // add_action('woocommerce_cancelled_order', array( $this, 'cancel_order' ), 10 ,1);
         // add_action( 'woocommerce_order_status_processing', array( $this, 'capture_payment' ) );
         // add_action( 'woocommerce_order_status_completed', array( $this, 'capture_payment' ) );
+    }
+
+    /**
+     * Logging method.
+     *
+     * @param string $message Log message.
+     * @param string $level   Optional. Default 'info'.
+     *     emergency|alert|critical|error|warning|notice|info|debug
+     * @param boolean $is_end insert log end flag
+     */
+    public static function log($message, $level = 'info', $is_end = true)
+    {
+        if (self::$log_enabled) {
+            if (empty(self::$log)) {
+                self::$log = wc_get_logger();
+            }
+            self::$log->log($level, $message, array( 'source' => 'mpwp' ));
+            if ($is_end) {
+                self::$log->log($level, '=========================================== ↑↑↑ END ↑↑↑ ===========================================', array( 'source' => 'mpwp' ));
+            }
+        }
     }
 
     /**
@@ -138,12 +168,35 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
                 'description' => __('This controls the description which the user sees during checkout.', 'mpwp'),
                 'default'     => __('MugglePay is a one-stop payment solution for merchants with an online payment need.', 'mpwp'),
             ),
+            'check_orders'      => array(
+                'title'       => __('Check Orders', 'mpwp'),
+                'type'        => 'title',
+                'description' => __('The plugin automatically checks the order payment status by default and updates the order status every 5 minutes.', 'mpwp'),
+            ),
+            // <br>You can click the button to check and update the payment status of all outstanding orders.
+            // 'check_orders_btn'      => array(
+            //     'title'       => '<div style="margin-top: -20px;"><button class="button change-theme" type="button">更新订单状态</button></div>',
+            //     'type'        => 'title'
+            // ),
+            'setting'              => array(
+                'title'       => __('Setting', 'mpwp'),
+                'type'        => 'title',
+                'description' => '',
+            ),
             'api_key'               => array(
                 'title'       => __('API Auth Token (API key) ', 'mpwp'),
                 'type'        => 'text',
                 'placeholder' => 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
                 /* translators: %s: URL */
                 'description' => sprintf(__('Register your MugglePay merchant accounts with your invitation code and get your API key at <a href="%s" target="_blank">Merchants Portal</a>. You will find your API Auth Token (API key) for authentication. <a href="%s" target="_blank">MORE</a>', 'mpwp'), 'https://merchants.mugglepay.com/user/register?ref=MP9237F1193789', 'https://mugglepay.docs.stoplight.io/api-overview/authentication'),
+            ),
+            'debug'          => array(
+                'title'       => __('Debug log', 'mpwp'),
+                'type'        => 'checkbox',
+                'label'       => __('Enable logging', 'mpwp'),
+                'default'     => 'no',
+                // translators: Description for 'Debug log' section of settings page.
+                'description' => sprintf(__('Log MPWP API events inside %s', 'mpwp'), '<code>' . WC_Log_Handler_File::get_log_file_path('mpwp') . '</code>'),
             ),
             'payment_gateway'              => array(
                 'title'       => __('Payment Gateway', 'mpwp'),
@@ -226,32 +279,30 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
                 $order = wc_get_order($order_id);
 
                 if (! $order) {
+                    self::log('Failed to Checking IPN response order callback for: ' . $order_id, 'error');
+                    throw new Exception('Checking IPN response is valid');
+                }
+
+                if (! $this->check_order_token($order, $posted['token'])) {
+                    self::log('Checking IPN response is valid: ', 'error', false);
+                    self::log(print_r($posted, true), 'error', false);
+                    self::log(print_r($order, true), 'error');
                     throw new Exception('Checking IPN response is valid');
                 }
 
                 if ($order->has_status(wc_get_is_paid_statuses())) {
-                    throw new Exception('Aborting, Order #' . $order_id. ' is already complete.');
+                    self::log('Aborting, Order #' . $order_id. ' is already complete.', 'error');
+                } else {
+                    $this->order_complete($order, $posted);
                 }
-
-                if (! $this->check_order_token($order, $posted['token'])) {
-                    throw new Exception('Checking IPN response is valid');
-                }
-                // Payment is complete
-                $order->payment_complete();
-                // Set transaction id.
-                $order->set_transaction_id($posted['order_id']);
-                // Save payment voucher data
-                $order->update_meta_data('_mpwp_payment_voucher', $posted);
-                // Change archived status
-                $order->update_meta_data('_mpwp_archived', true);
-                // Save metadata
-                $order->save();
 
                 wp_send_json(array(
                     'status' => 200
                 ), 200);
                 exit;
             }
+            self::log('Failed to check response order callback : ', 'error', false);
+            self::log(print_r($posted, true), 'error', false);
             throw new Exception('MugglePay IPN Request Failure');
         } catch (Exception $e) {
             add_option('test message', $e->getMessage());
@@ -264,27 +315,54 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
     }
 
     /**
+     * Complete order payment
+     */
+    public function order_complete($order, $voucher)
+    {
+
+        // Payment is complete
+        $order->payment_complete();
+        // Set transaction id.
+        $order->set_transaction_id($voucher['order_id']);
+        // Save payment voucher data
+        $order->update_meta_data('_mpwp_payment_voucher', $voucher);
+        // Change active status
+        $order->update_meta_data('_mpwp_payment_active', false);
+        // Save metadata
+        $order->save();
+
+        return true;
+    }
+
+    /**
      * Check payment statuses on orders and update order statuses.
      */
     public function check_orders()
     {
         // Check the status of non-archived MugglePay orders.
-        // $orders = wc_get_orders(array( 'mpwp_archived' => false, 'status'   => array( 'wc-pending' ) ));
-        // foreach ($orders as $order) {
-            // $transaction_id = $order->get_meta('_mpwp_prev_payment_transaction_id');
+        $orders = wc_get_orders(array( 'mpwp_payment_active' => true, 'status'   => array( 'wc-pending' ) ));
+        foreach ($orders as $order) {
+            $transaction_id = $order->get_meta('_mpwp_prev_payment_transaction_id');
 
-            // usleep(300000);  // Ensure we don't hit the rate limit.
-            // $result = Coinbase_API_Handler::send_request('charges/' . $charge_id);
+            usleep(1000000 * 3);  // Ensure we don't hit the rate limit. Delay 5 seconds.
 
-            // if (! $result[0]) {
-            //     self::log('Failed to fetch order updates for: ' . $order->get_id());
-            //     continue;
-            // }
+            $mugglepay_order = $this->mugglepay_request->get_order($transaction_id);
 
-            // $timeline = $result[1]['data']['timeline'];
-            // self::log('Timeline: ' . print_r($timeline, true));
-            // $this->_update_order_status($order, $timeline);
-        // }
+            self::log('Auto Checking Order #' . $order->get_id(), 'info', false);
+            self::log(print_r($mugglepay_order, true), 'info');
+
+            if (is_wp_error($mugglepay_order)) {
+                continue;
+            }
+
+            if ($mugglepay_order['invoice']['status'] !== 'PAID') {
+                continue;
+            }
+
+            $this->order_complete($order, $mugglepay_order['invoice']);
+
+            self::log('Auto Complete Order #' . $order->get_id(), 'info');
+        }
     }
 
 
@@ -322,6 +400,7 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
             // 'fast'				=> '',
             'token'				=> $this->create_order_token($order)
         );
+        self::log(print_r($mugglepay_args, true), 'info');
 
         // Send Request
         $raw_response = $this->mugglepay_request->send_request(
@@ -332,11 +411,15 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
             )
         );
 
+        self::log('Create Payment Url: ', 'info', false);
+        self::log(print_r($raw_response, true), 'info');
+
         if (
             (($raw_response['status'] === 200 || $raw_response['status'] === 201) && $raw_response['payment_url']) ||
             (($raw_response['status'] === 400 && $raw_response['error_code'] === 'ORDER_MERCHANTID_EXIST') && $raw_response['payment_url'])
         ) {
-
+            // Insert mugglepay order active flag
+            $order->update_meta_data('_mpwp_payment_active', true);
             // Save payment order id
             $order->update_meta_data('_mpwp_prev_payment_transaction_id', $raw_response['order']['order_id']);
             // Save metadata
@@ -527,24 +610,26 @@ class WC_Gateway_MPWP extends WC_Payment_Gateway
     }
 
     /**
-     * Handle a custom 'mpwp_archived' query var to get orders
-     * payed through MugglePay with the '_mpwp_payment_archived' meta.
+     * Handle a custom 'mpwp_prev_payment_transaction_id' query var to get orders
+     * payed through MugglePay with the 'mpwp_prev_payment_transaction_id' meta.
      * @param array $query - Args for WP_Query.
      * @param array $query_vars - Query vars from WC_Order_Query.
      * @return array modified $query
      */
     public function custom_query_var($query, $query_vars)
     {
-        if (array_key_exists('mpwp_payment_archived', $query_vars)) {
-            $query['meta_query'][] = array(
-                'key'     => '_mpwp_payment_archived',
-                'compare' => $query_vars['mpwp_payment_archived'] ? 'EXISTS' : 'NOT EXISTS',
-            );
-
+        if (array_key_exists('mpwp_payment_active', $query_vars)) {
             // Only check the order with MugglePay payment voucher
             $query['meta_query'][] = array(
-                'key'     => '_mpwp_prev_payment_transaction_id',
-                'compare' => $query_vars['mpwp_prev_payment_transaction_id'] ? 'EXISTS' : 'NOT EXISTS',
+                'key'     => '_mpwp_payment_active',
+                'compare' => $query_vars['mpwp_payment_active'] ? 'EXISTS' : 'NOT EXISTS',
+            );
+        }
+
+        if (array_key_exists('mpwp_prev_payment_transaction_id', $query_vars)) {
+            $query['meta_query'][] = array(
+                'key'       => '_mpwp_prev_payment_transaction_id',
+                'value'     => esc_attr($query_vars['mpwp_prev_payment_transaction_id'])
             );
         }
 

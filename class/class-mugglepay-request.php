@@ -20,6 +20,9 @@ class MugglePay_Request
     /** @var string MugglePay API url. */
     public $api_url = 'https://api.mugglepay.com/v1';
 
+    /** @var string MugglePay */
+    public $token   = '';
+
     /**
      * Constructor.
      *
@@ -28,6 +31,29 @@ class MugglePay_Request
     public function __construct($gateway)
     {
         $this->gateway    = $gateway;
+    }
+
+    /**
+     * Get MugglePay Order
+     * @param string $order_id MugglePay order ID. It's provided in the response of Create Order.
+     */
+    public function get_order($order_id)
+    {
+        // Send Request
+        $raw_response = $this->send_request(
+            '/orders/' . $order_id,
+            array(),
+            array(
+                'token'	=> $this->gateway->get_option('api_key')
+            ),
+            'GET'
+        );
+
+        if ($raw_response['status'] === 200) {
+            return $raw_response;
+        }
+        
+        return new WP_Error('error', $raw_response['error'], $raw_response);
     }
 
     /**

@@ -1,4 +1,6 @@
-# MugglePay For WooCommerce
+English | [简体中文](./readme-zh-CN.md)
+
+# DFOXT MugglePay For WooCommerce
 > MugglePay is a one-stop payment solution for merchants with an online payment need.
 
 ## Installation
@@ -9,13 +11,13 @@ This plugin is available on the [WordPress.org plugin repository], and can be in
 
 #### Within your WordPress dashboard
 1. Visit ‘Plugins > Add New’
-2. Search for ‘MugglePay For WooCommerce’
-3. Activate MugglePay For WooCommerce from your Plugins page.
+2. Search for ‘DFOXT MugglePay For WooCommerce’
+3. Activate DFOXT MugglePay For WooCommerce from your Plugins page.
 
 #### From WordPress.org plugin repository
-1. Download MugglePay For WooCommerce from <https://wordpress.org/plugins/mugglepay-for-woocommerce/>
+1. Download DFOXT MugglePay For WooCommerce from <https://wordpress.org/plugins/dfoxm-mugglepay-for-woocommerce>
 2. Upload to your ‘/wp-content/plugins/’ directory, using your favorite method (ftp, sftp, scp, etc…)
-3. Activate MugglePay For WooCommerce from your Plugins page.
+3. Activate DFOXT MugglePay For WooCommerce from your Plugins page.
 
 ### From this repository
 
@@ -27,9 +29,9 @@ Alternatively, you can move the zip file into the `wp-content/plugins` folder of
 
 You will then need to go to your WordPress administration Plugins page, and activate the plugin.
 
-## Configuring MugglePay For WooCommerce
+## Configuring DFOXT MugglePay For WooCommerce
 
-You will need to set up an account on [[MugglePay For WooCommerce](https://merchants.mugglepay.com/user/register?ref=MP9237F1193789)].
+You will need to set up an account on [[DFOXT MugglePay For WooCommerce](https://merchants.mugglepay.com/user/register?ref=MP9237F1193789)].
 
 Within the WordPress administration area, go to the WooCommerce > Settings > Payments page and you will see MugglePay in the table of payment gateways.
 
@@ -55,7 +57,7 @@ Description of the payment method on the checkout page
 
 Register your MugglePay merchant accounts with your invitation code and get your API key at [Merchants Portal](https://merchants.mugglepay.com/user/register?ref=MP9237F1193789). You will find your API Auth Token (API key) for authentication. [MORE](https://merchants.mugglepay.com/user/register?ref=MP9237F1193789)
 
-![Setting Page](./assets/setting.jpg)
+![Setting Page](https://github.com/hoythan/MugglePayForWooCommerce/blob/main/assets/screenshot-1.jpg)
 
 ## Prerequisites
 
@@ -71,5 +73,8 @@ This project is licensed under the Apache 2.0 License
 
 ## Changelog
 
-## 1.0.0 ##
-* MugglePay For WooCommerce
+## 1.0.2 ##
+* Support Cron Job Check payment statuses on orders and update order statuses.
+
+## 1.0.1 ##
+* DFOXT MugglePay For WooCommerce
